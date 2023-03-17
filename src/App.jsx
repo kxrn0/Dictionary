@@ -1,7 +1,8 @@
 import Dictionary from "./components/Dictionary/Dictionary";
 import SettingsContext from "./Settings.context";
+import { useState } from "react";
 import "./style.css";
-import { useState, useRef } from "react";
+import "./utilities.css";
 
 export default function App() {
   const [settings, setSettings] = useState(() => {
@@ -26,12 +27,13 @@ export default function App() {
   }
 
   return (
-    <div className="App">
+    <div
+      className={`App ${settings.theme} ${settings.font.split(" ").join("-")}`}
+    >
       <SettingsContext.Provider
         value={{ settings, update, options: ["sans serif", "serif", "mono"] }}
       >
         <Dictionary />
-        <p>{settings.theme}</p>
       </SettingsContext.Provider>
     </div>
   );

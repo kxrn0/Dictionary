@@ -1,0 +1,26 @@
+.heading-l {
+  font-size: 64px;
+  line-height: 77px;
+}
+
+.heading-m {
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.heading-s {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.body-m {
+  font-family: var(--family);
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.body-s {
+  font-size: 14px;
+  line-height: 17px;
+}

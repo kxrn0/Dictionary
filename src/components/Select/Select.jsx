@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import SettingsContext from "../../Settings.context";
 import SCSelect from "./Select.styled";
 
 export default function Select({ options, choice, change, duration = 0.33 }) {
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState(false);
   const [timeId, setTimeId] = useState(null);
+  const { settings } = useContext(SettingsContext);
 
   function handle_change(event) {
     const checked = event.target.checked;
@@ -18,8 +20,6 @@ export default function Select({ options, choice, change, duration = 0.33 }) {
 
   useEffect(() => {
     function listen(event) {
-      console.log("I was clicked");
-
       if (!event.target.closest(".select")) {
         setOpen(false);
         setTimeId(setTimeout(() => setContent(false), duration * 1000));
@@ -32,9 +32,9 @@ export default function Select({ options, choice, change, duration = 0.33 }) {
   }, []);
 
   return (
-    <SCSelect className="select">
-      <label htmlFor="selection">
-        <span>{choice}</span>
+    <SCSelect className={`select ${settings.theme}`}>
+      <label className="selection" htmlFor="selection">
+        <span className="body-m">{choice}</span>
         <input
           type="checkbox"
           checked={open}
@@ -48,10 +48,18 @@ export default function Select({ options, choice, change, duration = 0.33 }) {
           style={{ "--duration": `${duration}s` }}
         >
           {options.map((option) => (
-            <li key={option} onClick={() => change(option)}>
+            <li key={option}>
               <label htmlFor={option}>
-                <input type="radio" name="select-option" id={option} />
-                <span>{option}</span>
+                <input
+                  type="radio"
+                  name="select-option"
+                  id={option}
+                  checked={option === choice}
+                  onChange={() => change(option)}
+                />
+                <span className={`body-m ${option.split(" ").join("-")}`}>
+                  {option}
+                </span>
               </label>
             </li>
           ))}

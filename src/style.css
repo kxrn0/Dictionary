@@ -1,12 +1,111 @@
 *,
 *::before,
 *::after {
- margin:0;
- padding: 0;
- box-sizing: border-box; 
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body {
-    /* background-color: red; */
-    background-image: url("./assets/images/icon-moon.svg")
+@supports not (font-variation-settings: normal) {
+  @font-face {
+    font-family: sans-serifu;
+    src: url("./assets/fonts/inter/static/Inter-Regular.ttf");
+    font-weight: normal;
+  }
+
+  @font-face {
+    font-family: sans-serifu;
+    src: url("./assets/fonts/inter/static/Inter-Bold.ttf");
+    font-weight: bold;
+  }
+
+  @font-face {
+    font-family: serifu;
+    src: url("./assets/fonts/lora/static/Lora-Regular.ttf");
+    font-weight: normal;
+  }
+  @font-face {
+    font-family: serifu;
+    src: url("./assets/fonts/lora/static/Lora-Bold.ttf");
+    font-weight: bold;
+  }
+
+  @font-face {
+    font-family: serifu;
+    src: url("./assets/fonts/lora/static/Lora-BoldItalic.ttf");
+    font-weight: bold;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: mono;
+    src: url("./assets/fonts/inconsolata/static/Inconsolata-Regular.ttf");
+    font-weight: normal;
+  }
+
+  @font-face {
+    font-family: mono;
+    src: url("./assets/fonts/inconsolata/static/Inconsolata-Bold.ttf");
+    font-weight: bold;
+  }
+}
+
+@supports (font-feature-settings: normal) {
+  @font-face {
+    font-family: sans-serifu;
+    src: url("./assets/fonts/inter/Inter-VariableFont_slnt_wght.ttf");
+    font-weight: 100 1000;
+  }
+
+  @font-face {
+    font-family: serifu;
+    src: url("./assets/fonts/lora/Lora-VariableFont_wght.ttf");
+    font-weight: 100 1000;
+  }
+
+  @font-face {
+    font-family: serifu;
+    src: url("./assets/fonts/lora/Lora-Italic-VariableFont_wght.ttf");
+    font-weight: 100 1000;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: mono;
+    src: url("./assets/fonts/inconsolata/Inconsolata-VariableFont_wdth_wght.ttf");
+    font-weight: 100 1000;
+  }
+}
+
+.App {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+.App.light {
+  background: white;
+}
+
+.App.dark {
+  background: #050505;
+}
+
+.App.sans-serif {
+  /* font-family: sans-serifu; */
+  --family: sans-serifu;
+}
+
+.App.serif {
+  /* font-family: serifu; */
+  --family: serifu;
+}
+
+.App.mono {
+  /* font-family: mono; */
+  --family: mono;
+}
+
+main {
+  width: 50%;
 }
