@@ -4,13 +4,15 @@ import Select from "../Select/Select";
 import Toggle from "../Toggle/Toggle";
 import { useContext } from "react";
 import logo from "../../assets/images/logo.svg";
-import moon from "../../assets/images/icon-moon.svg";
+import { ReactComponent as Moon } from "../../assets/images/icon-moon.svg";
 
 export default function Navbar() {
   const preferences = useContext(SettingsContext);
 
   return (
-    <SCNavbar className={`navbar ${preferences.font} ${preferences.theme}`}>
+    <SCNavbar
+      className={`navbar ${preferences.settings.font} ${preferences.settings.theme}`}
+    >
       <img src={logo} alt="company logo" />
       <div className="settings">
         <Select
@@ -31,7 +33,7 @@ export default function Navbar() {
               })
             }
           />
-          <img src={moon} alt="theme icon" />
+          <Moon />
         </div>
       </div>
     </SCNavbar>

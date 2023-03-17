@@ -19,7 +19,7 @@ const SCNavbar = styled.nav`
     gap: 20px;
   }
 
-  & .toggle-section img {
+  & .toggle-section svg {
     width: 20px;
     height: 20px;
   }
@@ -30,11 +30,12 @@ const SCNavbar = styled.nav`
     height: 32px;
   }
 
-  &.light .toggle-section img {
-    
+  &.light .toggle-section svg path {
+    stroke: #838383;
   }
 
-  &.dark .toggle-section img {
+  &.dark .toggle-section svg path {
+    stroke: #a445ed;
   }
 `;
 
