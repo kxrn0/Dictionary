@@ -30,7 +30,6 @@ const SCSearchBar = styled.form`
   }
 
   & button {
-    /* background-image: url("../../assets/images/icon-search.svg"); */
     background-image: url(${searchIcon});
     background-size: 15px;
     background-position: center;

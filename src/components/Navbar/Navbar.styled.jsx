@@ -7,35 +7,41 @@ const SCNavbar = styled.nav`
   width: 100%;
   margin-bottom: 51px;
 
-  & .settings {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 26px;
+  & {
+    .settings {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .toggle-section {
+      display: flex;
+      gap: 20px;
+    }
+
+    .toggle-section svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .break {
+      background: #e9e9e9;
+      width: 1px;
+      height: 32px;
+    }
   }
 
-  & .toggle-section {
-    display: flex;
-    gap: 20px;
+  &.light {
+    .toggle-section svg path {
+      stroke: #838383;
+    }
   }
 
-  & .toggle-section svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  & .break {
-    background: #e9e9e9;
-    width: 1px;
-    height: 32px;
-  }
-
-  &.light .toggle-section svg path {
-    stroke: #838383;
-  }
-
-  &.dark .toggle-section svg path {
-    stroke: #a445ed;
+  &.dark {
+    .toggle-section svg path {
+      stroke: #a445ed;
+    }
   }
 `;
 

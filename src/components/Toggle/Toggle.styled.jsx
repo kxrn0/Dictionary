@@ -5,7 +5,6 @@ const SCToggle = styled.input`
   --height: 20px;
   --ball-radius: 14px;
   --padding: 3px;
-
   appearance: none;
   background: #757575;
   display: block;

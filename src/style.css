@@ -78,16 +78,19 @@
 }
 
 .App {
+  --purple: #a445ed;
   min-height: 100vh;
   display: grid;
   place-items: center;
 }
 
 .App.light {
+  --color: #2d2d2d;
   background: white;
 }
 
 .App.dark {
+  --color: white;
   background: #050505;
 }
 
