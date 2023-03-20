@@ -8,8 +8,8 @@ const options = {
   workbox: { globPatterns: ["**/*"] },
   includeAssets: ["**/*"],
   manifest: {
-    theme_color: "#f69435",
-    background_color: "#f69435",
+    theme_color: "#f69436",
+    background_color: "#f69434",
     display: "standalone",
     scope: "/Dictionary/",
     start_url: "/Dictionary/",
