@@ -4,6 +4,7 @@ import viteSvgr from "vite-plugin-svgr";
 import { VitePWA } from "vite-plugin-pwa";
 
 const options = {
+  base: "/Dictionary/",
   workbox: { globPatterns: ["**/*"] },
   includeAssets: ["**/*"],
   manifest: {
