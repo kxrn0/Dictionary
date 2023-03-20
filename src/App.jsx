@@ -1,6 +1,6 @@
 import Dictionary from "./components/Dictionary/Dictionary";
 import SettingsContext from "./Settings.context";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./style.css";
 import "./utilities.css";
 
@@ -25,6 +25,11 @@ export default function App() {
       return updated;
     });
   }
+
+  useEffect(() => {
+    document.querySelector("html").style.background =
+      settings.theme === "light" ? "white" : "#050505";
+  }, [settings]);
 
   return (
     <div
