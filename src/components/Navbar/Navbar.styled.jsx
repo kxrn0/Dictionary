@@ -41,6 +41,17 @@ const SCNavbar = styled.nav`
       stroke: #a445ed;
     }
   }
+  @media screen and (max-width: 500px) {
+    margin-bottom: 24px;
+
+    .settings {
+      gap: 16px;
+    }
+
+    .toggle-section {
+      gap: 12px;
+    }
+  }
 `;
 
 export default SCNavbar;

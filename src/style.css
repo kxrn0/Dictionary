@@ -117,4 +117,56 @@
   .App {
     padding: 24px;
   }
+
+  .App.serif {
+    --style: italic;
+  }
+}
+
+main.empty-query {
+  color: #ff5252;
+  align-self: flex-start;
+  margin-top: 8px;
+  font-weight: 400;
+}
+
+main.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 735px;
+  margin-top: 130px;
+}
+
+main.error span {
+  font-size: 64px;
+}
+
+main.error .heading-s {
+  margin: 44px 0 24px 0;
+}
+
+main.error .body-m {
+  color: var(--light-gray);
+  font-weight: 400;
+  text-align: center;
+}
+
+main.loading {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+@media screen and (max-width: 500px) {
+  main.error {
+    width: 90%;
+    margin-top: 50px;
+  }
+
+  main.error span {
+    font-size: 50px;
+  }
 }

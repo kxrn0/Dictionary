@@ -1,112 +1,135 @@
 import SCMain from "./Main.styled";
 import { ReactComponent as Play } from "../../assets/images/icon-play.svg";
-import { useQuery } from "@tanstack/react-query";
-import { useEffect, useRef } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
+import Loading from "../Loading";
 
 export default function Main({ word }) {
-  if (!word.trim()) return <main>Query cannot be empty</main>;
+  if (!word.trim())
+    return <main className="empty-query heading-s">Query cannot be empty</main>;
 
-  const { isLoading, isError, data, refetch } = useQuery({
-    queryKey: ["word"],
-    queryFn: async () => {
-      try {
-        const { data } = await axios(
-          `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
-        );
+  const [data, setData] = useState(null);
+  const [audios, setAudios] = useState([]);
 
-        return data;
-      } catch (error) {
-        throw error;
-      }
-    },
-  });
-  const audioRef = useRef([]);
+  function play_audio(i) {
+    audios.find((audio) => audio.index === i).audio.play();
+  }
 
   useEffect(() => {
-    refetch();
+    async function get_data(word) {
+      setData(null);
+      try {
+        let res;
 
-    audioRef.current.forEach((audio) => audio.pause());
-    audioRef.current = [];
+        res = await fetch(
+          `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+        );
+        res = await res.json();
+
+        audios.forEach((audio) => audio.audio.pause());
+        setAudios(
+          res
+            .map((r, i) => {
+              const audio = r.phonetics.some((phonetic) => phonetic.audio);
+
+              if (audio) {
+                return {
+                  audio: new Audio(
+                    r.phonetics.find((phonetic) => phonetic.audio).audio
+                  ),
+                  index: i,
+                };
+              }
+              return null;
+            })
+            .filter((a) => a)
+        );
+        setData(res);
+      } catch (error) {
+        setData(undefined);
+      }
+    }
+
+    get_data(word);
   }, [word]);
 
-  if (isLoading) return <main>Loading...</main>;
+  if (data === null)
+    return (
+      <main className="loading">
+        <Loading />
+        <p className="heading-s">Loading...</p>
+      </main>
+    );
 
-  if (isError) return <main>Error!</main>;
-
-  console.log(data);
+  if (data === undefined)
+    return (
+      <main className="error">
+        <span className="error">😕</span>
+        <h3 className="heading-s">No Definitions Found</h3>
+        <p className="body-m">
+          Sorry pal, we couldn't find definitions for the word you were looking
+          for. You can try the search again at later time or head to the web
+          instead.
+        </p>
+      </main>
+    );
 
   return (
     <SCMain>
-      {data.map((result, i) => {
-        const audio = result.phonetics.some((phonetic) => phonetic.audio);
-
-        if (audio)
-          audioRef.current.push(
-            new Audio(result.phonetics.find((phonetic) => phonetic.audio).audio)
-          );
-        else audioRef.current.push(null);
-
-        function play_audio(i) {
-          if (audioRef.current[i]) audioRef.current[i].play();
-        }
-
-        return (
-          <section key={i} className="result">
-            <div className="phonetics">
-              <div className="word">
-                <h1 className="heading-l">{result.word}</h1>
-                <p className="heading-m">{result.phonetic}</p>
-              </div>
-              {audio ? (
-                <button onClick={() => play_audio(i)}>
-                  <Play />
-                </button>
-              ) : null}
+      {data.map((result, i) => (
+        <section key={i} className="result">
+          <div className="phonetics">
+            <div className="word">
+              <h1 className="heading-l">{result.word}</h1>
+              <p className="heading-m">{result.phonetic}</p>
             </div>
-            <ul className="meanings">
-              {result.meanings.map((meaning, i) => (
-                <li key={i} className="meaning">
-                  <h2 className="heading-s">{meaning.partOfSpeech}</h2>
-                  <div className="definitions">
-                    <p className="heading-s">Meaning</p>
-                    <ul className="descriptions">
-                      {meaning.definitions.map((definition, i) => (
-                        <li key={i} className="body-m">
-                          <div className="content">
-                            <p className="body-m">{definition.definition}</p>
-                            {definition.example ? (
-                              <p className="body-m example">
-                                "{definition.example}"
-                              </p>
-                            ) : null}
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
+            {audios.find((audio) => audio.index === i) ? (
+              <button onClick={() => play_audio(i)}>
+                <Play />
+              </button>
+            ) : null}
+          </div>
+          <ul className="meanings">
+            {result.meanings.map((meaning, i) => (
+              <li key={i} className="meaning">
+                <h2 className="heading-s part">{meaning.partOfSpeech}</h2>
+                <div className="definitions">
+                  <p className="heading-s">Meaning</p>
+                  <ul className="descriptions">
+                    {meaning.definitions.map((definition, i) => (
+                      <li key={i} className="body-m">
+                        <div className="content">
+                          <p className="body-m">{definition.definition}</p>
+                          {definition.example ? (
+                            <p className="body-m example">
+                              "{definition.example}"
+                            </p>
+                          ) : null}
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                {meaning.synonyms.length ? (
+                  <div>
+                    <span className="heading-s indicator">Synonyms </span>
+                    <span className="heading-s list synonyms">
+                      {meaning.synonyms.join(", ")}
+                    </span>
                   </div>
-                  {meaning.synonyms.length ? (
-                    <div>
-                      <span className="heading-s indicator">Synonyms </span>
-                      <span className="heading-s synonyms">
-                        {meaning.synonyms.join(", ")}
-                      </span>
-                    </div>
-                  ) : null}
-                  {meaning.antonyms.length ? (
-                    <div>
-                      <span className="heading-s indicator">Antonyms </span>
-                      <span className="heading-s antonyms">
-                        {meaning.antonyms.join(", ")}
-                      </span>
-                    </div>
-                  ) : null}
-                </li>
-              ))}
-            </ul>
-          </section>
-        );
-      })}
+                ) : null}
+                {meaning.antonyms.length ? (
+                  <div>
+                    <span className="heading-s indicator">Antonyms </span>
+                    <span className="heading-s list antonyms">
+                      {meaning.antonyms.join(", ")}
+                    </span>
+                  </div>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
       <div className="source">
         <span className="body-s">Source</span>{" "}
         <a className="body-s" target="_blank" href={data[0].sourceUrls}>

@@ -19,6 +19,7 @@ export default function SearchBar({ initialWord, update }) {
     >
       <input
         type="text"
+        placeholder="Search for any word..."
         value={word}
         name="word-input"
         onChange={(event) => setWord(event.target.value)}

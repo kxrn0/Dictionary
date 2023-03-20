@@ -157,6 +157,24 @@ const SCMain = styled.main`
       .antonyms.heading-s {
         color: var(--red);
       }
+
+      @media (hover: hover) {
+        .list:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    @media screen and (max-width: 500px) {
+      gap: 30px;
+
+      .meaning {
+        gap: 31px;
+
+        .part.heading-s {
+          font-style: var(--style);
+        }
+      }
     }
   }
 
@@ -187,6 +205,13 @@ const SCMain = styled.main`
     span.body-s {
       color: var(--light-gray);
     }
+
+    @media screen and (max-width: 500px) {
+      flex-direction: column;
+      gap: 7px;
+      margin-top: 32px;
+      padding: 24px;
+    }
   }
 
   @media screen and (max-width: 900px) {
@@ -200,6 +225,9 @@ const SCMain = styled.main`
   @media screen and (max-width: 500px) {
     width: 330px;
     padding: 30px 0;
+    .result {
+      margin-top: 40px;
+    }
   }
 `;
 
