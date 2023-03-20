@@ -66,35 +66,53 @@ export default function Main({ word }) {
             </div>
             <ul className="meanings">
               {result.meanings.map((meaning, i) => (
-                <li key={i}>
-                  <h2>{meaning.partOfSpeech}</h2>
+                <li key={i} className="meaning">
+                  <h2 className="heading-s">{meaning.partOfSpeech}</h2>
                   <div className="definitions">
-                    <p>Meaning</p>
-                    <ul>
+                    <p className="heading-s">Meaning</p>
+                    <ul className="descriptions">
                       {meaning.definitions.map((definition, i) => (
-                        <li key={i}>{definition.definition}</li>
+                        <li key={i} className="body-m">
+                          <div className="content">
+                            <p className="body-m">{definition.definition}</p>
+                            {definition.example ? (
+                              <p className="body-m example">
+                                "{definition.example}"
+                              </p>
+                            ) : null}
+                          </div>
+                        </li>
                       ))}
                     </ul>
                   </div>
                   {meaning.synonyms.length ? (
                     <div>
-                      <span className="indicator">Synonyms</span>
-                      <span>{meaning.synonyms.join(",")}</span>
+                      <span className="heading-s indicator">Synonyms </span>
+                      <span className="heading-s synonyms">
+                        {meaning.synonyms.join(", ")}
+                      </span>
                     </div>
                   ) : null}
                   {meaning.antonyms.length ? (
                     <div>
-                      <span className="indicator">Antonyms</span>
-                      <span>{meaning.antonyms.join(",")}</span>
+                      <span className="heading-s indicator">Antonyms </span>
+                      <span className="heading-s antonyms">
+                        {meaning.antonyms.join(", ")}
+                      </span>
                     </div>
                   ) : null}
                 </li>
               ))}
             </ul>
-            <div className="source"></div>
           </section>
         );
       })}
+      <div className="source">
+        <span className="body-s">Source</span>{" "}
+        <a className="body-s" target="_blank" href={data[0].sourceUrls}>
+          {data[0].sourceUrls}
+        </a>
+      </div>
     </SCMain>
   );
 }

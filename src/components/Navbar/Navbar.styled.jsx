@@ -7,29 +7,27 @@ const SCNavbar = styled.nav`
   width: 100%;
   margin-bottom: 51px;
 
-  & {
-    .settings {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 26px;
-    }
+  .settings {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 26px;
+  }
 
-    .toggle-section {
-      display: flex;
-      gap: 20px;
-    }
+  .toggle-section {
+    display: flex;
+    gap: 20px;
+  }
 
-    .toggle-section svg {
-      width: 20px;
-      height: 20px;
-    }
+  .toggle-section svg {
+    width: 20px;
+    height: 20px;
+  }
 
-    .break {
-      background: #e9e9e9;
-      width: 1px;
-      height: 32px;
-    }
+  .break {
+    background: #e9e9e9;
+    width: 1px;
+    height: 32px;
   }
 
   &.light {
