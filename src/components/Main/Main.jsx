@@ -1,7 +1,7 @@
 import SCMain from "./Main.styled";
 import { ReactComponent as Play } from "../../assets/images/icon-play.svg";
 import { useEffect, useState } from "react";
-import Loading from "../Loading";
+import Loading from "../Loading/Loading";
 
 export default function Main({ word }) {
   if (!word.trim())
