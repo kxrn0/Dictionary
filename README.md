@@ -35,7 +35,7 @@ Users should be able to:
 ### Links
 
 - [Solution](https://github.com/kxrn0/Dictionary)
-- [Live Site](https://kxrn0.github.io/Pomodoro-App/)
+- [Live Site](https://kxrn0.github.io/Dictionary/)
 
 ## My process
 
